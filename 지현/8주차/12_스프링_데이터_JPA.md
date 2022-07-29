@@ -38,7 +38,7 @@
     
     - 요청url은 모두 `member/memberUpdateForm?id=1`
     - HTTP 요청으로 받은 회원 아이디를 도메인 클래스 컨버터가 회원 엔티티로 변환해서 넘겨줌
-    - 주의할 점: **도메인 클래스 컨버터로 넘겨 받은 엔티티는 변경해도 DB에 반영되지 않음. 단순 조회용 (컨트롤러에서는 수정하지 않는 것이 바람직)**
+    - 주의할 점: **도메인 클래스 컨버터로 넘겨 받은 엔티티는 변경해도 DB에 반영되지 않음(준영속상태. 변경감지X). 단순 조회용 (컨트롤러에서는 수정하지 않는 것이 바람직)**
 2. 페이징과 정렬
     - `PageableHandlerMethodArgumentResolver`와 `SortHandlerMethodArgumentResolver`
     → 스프링 데이터의 페이징과 정렬 기능을 스프링 MVC에서 편리하게 사용하도록 제공
@@ -56,11 +56,11 @@
     - 파라미터로 Pageable인터페이스 (실제로는 PageRequest 객체)를 받음
     - Pageable은 page, sort, size의 요청 파라미터 정보로 만들어짐
     - 예시
-        - “/members?page=2”: 인덱스41부터 20개 (default size: 20, 인덱스는 0부터 시작)
-        - “/members?page=0&size=3&sort=name,desc&sort=address.city”
+        + “/members?page=2”: 인덱스41부터 20개 (default size: 20, 인덱스는 0부터 시작)
+        + “/members?page=0&size=3&sort=name,desc&sort=address.city”
     - 접두사
-        - 사용할 페이징정보가 둘 이상일 때 `@Qualifier` 사용
-        - /members?member_page=0&order_page=1
+        + 사용할 페이징정보가 둘 이상일 때 `@Qualifier` 사용
+        + /members?member_page=0&order_page=1
         
         ```java
         @RequestMapping(value = "/members", method = RequestMethod.GET)
