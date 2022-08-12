@@ -65,11 +65,11 @@
         
         ```java
         @Override
-        	protected void doRollback(DefaultTransactionStatus status) {
-        		JpaTransactionObject txObject = (JpaTransactionObject) status.getTransaction();
-        		if (status.isDebug()) {
-        			logger.debug("Rolling back JPA transaction on EntityManager [" +
-        					txObject.getEntityManagerHolder().getEntityManager() + "]");
+        protected void doRollback(DefaultTransactionStatus status) {
+         JpaTransactionObject txObject = (JpaTransactionObject) status.getTransaction();
+        	   if (status.isDebug()) {
+        		   logger.debug("Rolling back JPA transaction on EntityManager [" +
+        				txObject.getEntityManagerHolder().getEntityManager() + "]");
         		}
         		try {
         			EntityTransaction tx = txObject.getEntityManagerHolder().getEntityManager().getTransaction();
